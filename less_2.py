@@ -87,4 +87,24 @@
 то новый элемент с тем же значением должен разместиться после них.
 '''
 
-my_list = [7, 5, 3, 3, 2]
+# my_list = [7, 5, 3, 3, 2]
+#
+# # запросим у пользователя число
+# num = int(input('Введите число\n'))
+#
+# # сразупроверим, не лежит ли новое значение в пределах имеющихся
+# # если нет - просто добавим в соответствующий конец списка
+# if num < my_list[-1]:
+#     my_list.insert(len(my_list), num)
+# elif num > my_list[0]:
+#     my_list.insert(0, num)
+#
+# else:
+#     for ind, val in enumerate(my_list):
+#         if num >= val:
+#             my_list.insert(ind, num)
+#             break
+#
+# print(my_list)
+#
+
