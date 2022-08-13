@@ -88,6 +88,7 @@ for ind, wrd in enumerate(word_ls):
 '''
 
 my_list = [7, 5, 3, 3, 2]
+# my_list = [7, 5, 4, 3, 3, 2]
 
 # запросим у пользователя число
 num = int(input('Введите число\n'))
@@ -150,4 +151,3 @@ if base:
     # print(struct)
 else:
     print('Список товаров пуст')
-
