@@ -6,69 +6,69 @@
 Проверить работу полученной структуры на реальных данных.
 '''
 
-# class Data:
-#
-#     def __init__(self, raw_data):
-#         # здесь будем храниить принятую строку, в "сыром" виде, без валидации
-#         self.raw_data = raw_data
-#
-#     @classmethod
-#     def extract_data_part(cls, raw_data):
-#         '''
-#         метод извлекает части даты, преобразует их в int и возвращает их в виде кортежа (день, месяц, год)
-#         :param raw_data: -> str
-#         :return: -> tuple
-#         '''
-#
-#         # получим кортеж с частями даты
-#         data_tpl = tuple([int(raw_data[:2]), int(raw_data[3:5]), int(raw_data[6:])])
-#
-#         # так как у нас есть ссылка на класс, со статическим методом, в котором определен метод для валидации частей даты,
-#         # то сразу проверим эти части даты на корректность значений
-#         success = cls.check_data_parts(data_tpl)
-#
-#         if not success:
-#             print('Введены не корректные значения даты')
-#
-#         return tuple(data_tpl)
-#
-#     @staticmethod
-#     def check_data_parts(data_tpl):
-#         '''
-#         метод проводит валидацию принятых частей даты, если все части даты корретны, возвращает True
-#         :param data_tpl: -> tuple
-#         :return: -> bool
-#         '''
-#
-#         day, month, yaer = data_tpl
-#
-#         # проверим месяц
-#         month_correct = (0 < month < 13)
-#
-#         # проверим день
-#         last_day = 0
-#         if month_correct:
-#             if month in [1, 3, 5, 7, 8, 10, 12]:
-#                 last_day = 31
-#             elif month == 2:
-#                 last_day = 28
-#             else:
-#                 last_day = 30
-#
-#         day_correct = (0 < day < last_day + 1)
-#
-#         # проверим год
-#         year_correct = (yaer > 0)
-#
-#         return day_correct and month_correct and year_correct
-#
-#
-# # значения для проверки
-# d1 = Data('26-08-2022')
-# print(Data.extract_data_part(d1.raw_data))
-#
-# d2 = Data('26-15-2022')
-# print(Data.extract_data_part(d2.raw_data))
+class Data:
+
+    def __init__(self, raw_data):
+        # здесь будем храниить принятую строку, в "сыром" виде, без валидации
+        self.raw_data = raw_data
+
+    @classmethod
+    def extract_data_part(cls, raw_data):
+        '''
+        метод извлекает части даты, преобразует их в int и возвращает их в виде кортежа (день, месяц, год)
+        :param raw_data: -> str
+        :return: -> tuple
+        '''
+
+        # получим кортеж с частями даты
+        data_tpl = tuple([int(raw_data[:2]), int(raw_data[3:5]), int(raw_data[6:])])
+
+        # так как у нас есть ссылка на класс, со статическим методом, в котором определен метод для валидации частей даты,
+        # то сразу проверим эти части даты на корректность значений
+        success = cls.check_data_parts(data_tpl)
+
+        if not success:
+            print('Введены не корректные значения даты')
+
+        return tuple(data_tpl)
+
+    @staticmethod
+    def check_data_parts(data_tpl):
+        '''
+        метод проводит валидацию принятых частей даты, если все части даты корретны, возвращает True
+        :param data_tpl: -> tuple
+        :return: -> bool
+        '''
+
+        day, month, yaer = data_tpl
+
+        # проверим месяц
+        month_correct = (0 < month < 13)
+
+        # проверим день
+        last_day = 0
+        if month_correct:
+            if month in [1, 3, 5, 7, 8, 10, 12]:
+                last_day = 31
+            elif month == 2:
+                last_day = 28
+            else:
+                last_day = 30
+
+        day_correct = (0 < day < last_day + 1)
+
+        # проверим год
+        year_correct = (yaer > 0)
+
+        return day_correct and month_correct and year_correct
+
+
+# значения для проверки
+d1 = Data('26-08-2022')
+print(Data.extract_data_part(d1.raw_data))
+
+d2 = Data('26-15-2022')
+print(Data.extract_data_part(d2.raw_data))
 
 '''
 2. Создайте собственный класс-исключение, обрабатывающий ситуацию деления на ноль. 
@@ -77,32 +77,32 @@
 '''
 
 #
-# class MyZeroDiv(Exception):
-#     def __init__(self, txt_err):
-#         self.txt = txt_err
-#
-#
-# # Зададим делимое
-# dividend = 100
-#
-# # будем запрашивать делитель, пока не получим корректный
-# currect = False
-# while not currect:
-#
-#     # делитель получим у пользователя
-#     divisor = int(input("Введите число-делитель\n"))
-#
-#     # обработаем исключение деления на "0"
-#     try:
-#         if divisor == 0:
-#             raise MyZeroDiv('Ошибка деления на ноль')
-#
-#     except MyZeroDiv as err:
-#         print(err)
-#
-#     else:
-#         currect = True
-#         print(f'{dividend}/{divisor}={dividend/divisor}')
+class MyZeroDiv(Exception):
+    def __init__(self, txt_err):
+        self.txt = txt_err
+
+
+# Зададим делимое
+dividend = 100
+
+# будем запрашивать делитель, пока не получим корректный
+currect = False
+while not currect:
+
+    # делитель получим у пользователя
+    divisor = int(input("Введите число-делитель\n"))
+
+    # обработаем исключение деления на "0"
+    try:
+        if divisor == 0:
+            raise MyZeroDiv('Ошибка деления на ноль')
+
+    except MyZeroDiv as err:
+        print(err)
+
+    else:
+        currect = True
+        print(f'{dividend}/{divisor}={dividend/divisor}')
 
 '''
 3. Создайте собственный класс-исключение, который должен проверять содержимое списка на наличие только чисел. 
@@ -111,43 +111,43 @@
 Класс-исключение должен контролировать типы данных элементов списка.
 '''
 
-# # создадим класс, обрабатывающий ошибку ввода неверного типа
-# class NotDigitErr(Exception):
-#     def __init__(self, txt_err):
-#         self.txt = txt_err
-#
-# # Зададим константу, содержащую команду остановки ввода элементов
-# STOP = 'stop'
-#
-# # переменная будет содержать текущие значения, вводимые пользователем
-# next_el = ''
-#
-# # список чисел, заполняемый пользователем
-# user_num_list = []
-#
-# # будем запрашивать данные, пока пользователь не введет команду остановки ввода
-# while True:
-#
-#     next_el = input(f"Введите число для заполнения списка или {STOP}\n")
-#
-#     # если введена команда остановки - сразу прекращаем добавление элементов в список
-#     if next_el.lower() == STOP:
-#         break
-#
-#     try:
-#         # при попытке ввода "не числа" активизируем исключение
-#         if not next_el.isdigit():
-#             raise NotDigitErr('Введено не числовое значение')
-#
-#     # отловим исключение
-#     except NotDigitErr as err:
-#         print(err)
-#
-#     else:
-#         user_num_list.append(int(next_el))
-#
-#
-# print(f'Введен список:\n{user_num_list}')
+# создадим класс, обрабатывающий ошибку ввода неверного типа
+class NotDigitErr(Exception):
+    def __init__(self, txt_err):
+        self.txt = txt_err
+
+# Зададим константу, содержащую команду остановки ввода элементов
+STOP = 'stop'
+
+# переменная будет содержать текущие значения, вводимые пользователем
+next_el = ''
+
+# список чисел, заполняемый пользователем
+user_num_list = []
+
+# будем запрашивать данные, пока пользователь не введет команду остановки ввода
+while True:
+
+    next_el = input(f"Введите число для заполнения списка или {STOP}\n")
+
+    # если введена команда остановки - сразу прекращаем добавление элементов в список
+    if next_el.lower() == STOP:
+        break
+
+    try:
+        # при попытке ввода "не числа" активизируем исключение
+        if not next_el.isdigit():
+            raise NotDigitErr('Введено не числовое значение')
+
+    # отловим исключение
+    except NotDigitErr as err:
+        print(err)
+
+    else:
+        user_num_list.append(int(next_el))
+
+
+print(f'Введен список:\n{user_num_list}')
 
 '''
 4. Начните работу над проектом «Склад оргтехники». Создайте класс, описывающий склад. 
@@ -164,6 +164,10 @@
 можно использовать любую подходящую структуру (например, словарь).
 '''
 
+'''
+6. Продолжить работу над вторым заданием. Реализуйте механизм валидации вводимых пользователем данных. 
+Например, для указания количества принтеров, отправленных на склад, нельзя использовать строковый тип данных.
+'''
 
 class Warehouse:
     # хранит последний идентификационный номер товара на складх (сквозная нумерация по всем складам)
@@ -172,13 +176,17 @@ class Warehouse:
     def __init__(self, name):
         self.name = name
 
-        # структура хранения остатков на складе
+        # структура хранения идентификационных номеров на складе - словарь
+        # дзесь ключ - идентификационный номер, значение - объект "оргтехника"
         self.stock = {}
 
+        # структура хранения остатков на складе
+        # дзесь ключ - полное наименование (производитель, модель), значение - остаток
+        self.leftover = {}
 
     # метод будет обновлять последний присвоенный id на всех действующих складах и возвращать его
     @staticmethod
-    def _get_id():
+    def _get_next_id():
         '''
         возвращает следующий идентификационный номер
         :return: int
@@ -189,17 +197,30 @@ class Warehouse:
     # метод для оприходования техники на склад
     def posting(self, eqpt):
         # при оприходовании товара присваевается очередной идентификационный номер, этот номер присваивается товару
-        # и товар добавляется в структуру хранимых на складе остатков
+        # и товар добавляется в структуру хранимых на складе идентификационных номеров и остатков
 
-        curr_id = Warehouse._get_id()
+        curr_id = Warehouse._get_next_id()
+
+        # присвоим полученный идентификационный номер товару
         eqpt.inv_number = curr_id
+
+        # зафиксируем идентификационный номер на складе
         self.stock[curr_id] = eqpt
+
+        # увеличимостаток на скледе, используем метод поиска остатков
+        cnt = self.get_leftover(eqpt.__str__())
+        self.leftover[eqpt.__str__()] = cnt + 1
 
 
     def to_division(self, eqpt_id, division_name):
 
         try:
+            # удаляем идентификационный номер
             find_eqpt = self.stock.pop(eqpt_id)
+
+            # уменьшаем остаток
+            self.leftover[find_eqpt.__str__()] -= 1
+
             print(f'{find_eqpt} передан в подразделение {division_name}')
 
         except KeyError:
@@ -207,11 +228,32 @@ class Warehouse:
 
 
     # метод показывает информацию об остатках на складе
-    def get_info(self):
+    def get_info_id(self):
+
+        # будет хранить полные наименования номенклатуры для поиска остатков
+        goods_set = set()
+
+        # соберем информацию по инвентарным номерам
         st = f'На складе {self.name} в наличии:\n'
-        for id, name in self.stock.items():
-            st += f'{name}, (инв.№ {id})\n'
+        for id, good in self.stock.items():
+            st += f'{good}, (инв.№ {id})\n'
+            goods_set.add(good.__str__())
+
+        # добавим итоговую информацию по количеству остатка
+        st = st + 'Итого остатков:\n'
+        for i in  goods_set:
+            st += f'{i} - {self.get_leftover(i)} шт.\n'
+
         return st
+
+    # метод будет возвращвть количество определенной номенклатуры на складе,
+    # поиск номеклатуры осуществляется по полному наименованию
+
+    def get_leftover(self, full_name):
+        try:
+            return self.leftover[full_name]
+        except KeyError:
+            return 0
 
 
 class Equipment():
@@ -264,23 +306,30 @@ wh_1 = Warehouse('Центральный')
 cop_1 = Copyr(model='LJ 2010', manufacturer='HP', price=1200, two_size=False)
 cop_2 = Copyr(model='RG-2300-1', manufacturer='Xerox', price=34590, two_size=True)
 
-pr_1 = Printer(model='G-124', manufacturer='Toshiba', price=47346, print_type='laser')
+# принтеры будут одинаковые
+pr_1 = Printer(model='F-0045', manufacturer='Toshiba', price=7764, print_type='matrix')
 pr_2 = Printer(model='F-0045', manufacturer='Toshiba', price=7764, print_type='matrix')
+pr_3 = Printer(model='F-0045', manufacturer='Toshiba', price=7764, print_type='matrix')
+pr_4 = Printer(model='F-0045', manufacturer='Toshiba', price=7764, print_type='matrix')
 
 scan_1 = Scaner(model='df9087', manufacturer='Cannon', price=4352, max_resol="1490x1860")
 scan_2 = Scaner(model='DD90', manufacturer='Samsung', price=9234, max_resol="2500x4890")
 
 # примем все на склад
 wh_1.posting(cop_1)
-wh_1.posting(pr_1)
-wh_1.posting(scan_1)
-
 wh_1.posting(cop_2)
-wh_1.posting(pr_2)
+
+wh_1.posting(scan_1)
 wh_1.posting(scan_2)
 
+wh_1.posting(pr_1)
+wh_1.posting(pr_2)
+wh_1.posting(pr_3)
+wh_1.posting(pr_4)
+
+
 # Посмотрим наличие на складе
-print(wh_1.get_info())
+print(wh_1.get_info_id())
 
 # передадим один принтер и два сканера в подразделение
 wh_1.to_division(pr_1.inv_number, 'Администрация')
@@ -291,6 +340,36 @@ wh_1.to_division(scan_2.inv_number, 'Администрация')
 wh_1.to_division(888, 'Администрация')
 
 # Посмотрим наличие на складе после передачи в подразделение
-print(wh_1.get_info())
+print(wh_1.get_info_id())
+
+'''
+7. Реализовать проект «Операции с комплексными числами». Создайте класс «Комплексное число». 
+Реализуйте перегрузку методов сложения и умножения комплексных чисел. Проверьте работу проекта. 
+'''
+
+class Complex_num:
+    def __init__(self, real, img):
+
+        # действительная часть
+        self.real = real
+
+        # мнимая часть
+        self.img = img
+
+    def __str__(self):
+        return f'({self.real} + {self.img}i)'
+
+    def __add__(self, other):
+        return Complex_num(self.real + other.real, self.img + other.img)
+
+    def __mul__(self, other):
+        curr_real = (self.real * other.real) - (self.img * other.img)
+        curr_img = (self.real * other.img) + (self.img * other.real)
+        return Complex_num(curr_real, curr_img)
 
 
+a = Complex_num(2, 5)
+b = Complex_num(-3, 2)
+
+print(f'{a} + {b} = {a + b}')
+print(f'{a} * {b} = {a * b}')
